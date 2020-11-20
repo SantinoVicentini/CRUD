@@ -2,7 +2,7 @@ const fs = require('fs');
 var products = JSON.parse(fs.readFileSync(__dirname + '/../data/productos.json'));
 
 
-let indexController = {
+let productController = {
     home: function(req,res,next){
         return res.render('inicio')
     },
@@ -42,8 +42,21 @@ let indexController = {
         editProductJSON = JSON.stringify(editProduct);
         fs.writeFileSync(__dirname + '/../data/productos.json', editProductJSON);
         return res.redirect('/edit/' + productId)
+    },
+    destroy: function(req,res,next){
+        let productId = req.params.id;
+        let productDestroy = products.filter(function(product){
+            return product.id != productId;
+        });
+        productDestroyJSON = JSON.stringify(productDestroy);
+        fs.writeFileSync(__dirname + '/../data/productos.json', productDestroyJSON);
+        return res.send('producto eliminado');
+    },
+    list: function(req,res,next){
+        res.render('list', {products});
     }
+ }
+    
 
-}
 
-module.exports = indexController;
+module.exports = productController;

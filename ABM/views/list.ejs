@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado</title>
+</head>
+<body>
+    <a href="/create">CREAR PRODUCTO</a>
+    <ul>
+        <% products.forEach(function(product){ %>
+            <li>
+                Producto: <%=product.nombre%> 
+                <a href="/edit/<%=product.id%>">Editar</a> - <a href="/delete/<%=product.id%>">Borrar</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
