@@ -48,6 +48,16 @@ let productController = {
         let productDestroy = products.filter(function(product){
             return product.id != productId;
         });
+        let productFound;
+        for(let i = 0; i < products.length; i++){
+            if(products[i].id == productId){
+                productFound = products[i];
+                break;
+            }
+        }
+        if(!productFound){
+            return res.send('este producto no existe');
+        }
         productDestroyJSON = JSON.stringify(productDestroy);
         fs.writeFileSync(__dirname + '/../data/productos.json', productDestroyJSON);
         return res.send('producto eliminado');
